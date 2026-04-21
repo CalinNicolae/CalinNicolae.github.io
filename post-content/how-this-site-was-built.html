@@ -1,0 +1,80 @@
+<h2>The Decision to Build from Scratch</h2>
+<p>
+  When it came time to put together a portfolio for the Professional Networking module at Howest,
+  the obvious shortcut would have been WordPress, Wix, or a pre-built GitHub Pages theme.
+  I chose not to go that route. For a cybersecurity and computer science student, handing control
+  of your public presence to a third-party CMS feels like a contradiction. More practically,
+  a hand-built site demonstrates exactly the kind of skills that make this portfolio worth looking at.
+</p>
+<p>
+  This post documents how the site was built, how it works, and how to add new content to it —
+  satisfying blocking factor 1c from the Howest Professional Networking module, which requires
+  an explanation of the site's construction.
+</p>
+
+<h2>The Stack</h2>
+<p>
+  The entire site runs on three technologies and zero dependencies:
+</p>
+<ul>
+  <li><strong>HTML5</strong> — semantic page structure, accessible markup</li>
+  <li><strong>CSS3</strong> — design system built entirely with custom properties, no preprocessor</li>
+  <li><strong>Vanilla JavaScript (ES6+)</strong> — modules, fetch API, IntersectionObserver, dynamic rendering</li>
+</ul>
+<p>
+  Fonts are loaded from Google Fonts (<code>JetBrains Mono</code> and <code>Syne</code>) via a single
+  <code>@import</code> in the stylesheet. There is no build step, no <code>node_modules</code>,
+  no bundler. Opening <code>index.html</code> in a browser is all it takes.
+</p>
+
+<h2>How the Design System Works</h2>
+<p>
+  Every colour, spacing value, and font is defined as a CSS custom property in <code>:root</code>
+  inside <code>style.css</code>. Changing the primary neon accent from cyan to any other colour
+  means editing one line. Utility classes like <code>.neon-glow</code>, <code>.glitch</code>,
+  and <code>.tag</code> are defined once and reused across pages.
+</p>
+
+<h2>How the Blog System Works</h2>
+<p>
+  The blog is driven by a single JSON file — <code>data/posts.json</code> — which acts as the
+  data layer. Each entry holds the post's metadata: title, date, category, tags, excerpt,
+  cover image path, and a pointer to the content file.
+</p>
+<p>
+  Post content lives in <code>post-content/</code> as small HTML fragments — no
+  <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, or <code>&lt;body&gt;</code> tags.
+  When you navigate to <code>post.html?id=event-01</code>, the page reads the URL parameter,
+  fetches the matching entry from <code>posts.json</code>, renders all the metadata into the
+  header, then fetches <code>post-content/event-01.html</code> and injects it into the article body.
+  No server, no database — just <code>fetch()</code>.
+</p>
+
+<h2>Adding a New Post</h2>
+<p>Three steps:</p>
+<ol>
+  <li>Add a new JSON object to <code>data/posts.json</code> with all required fields.</li>
+  <li>Create <code>post-content/your-slug.html</code> with the article body HTML.</li>
+  <li>Drop any images into <code>assets/images/</code> and update the paths in the JSON entry.</li>
+</ol>
+<p>
+  Push to the <code>main</code> branch and GitHub Pages deploys automatically within seconds.
+</p>
+
+<h2>Tools and Workflow</h2>
+<p>
+  The site was built using Visual Studio Code, Git for version control, and browser developer tools
+  for layout work. AI tools were used as a research and brainstorming aid throughout — to look up
+  CSS behaviour, explore approaches to the dynamic post loading, and reason through animation logic.
+  This is the same way a developer might use Stack Overflow, MDN, or official documentation:
+  as a resource to accelerate specific problems, not as a replacement for writing and understanding
+  the code. Every line in this repository was read, reasoned about, and deliberately placed.
+</p>
+
+<h2>Hosting</h2>
+<p>
+  The site is hosted on GitHub Pages, free, reliable, and it stays live after graduation.
+  A <code>.nojekyll</code> file in the repository root tells GitHub Pages to skip the Jekyll
+  build and serve the files directly. The result is a fast, dependency-free static site with
+  no ongoing cost.
+</p>

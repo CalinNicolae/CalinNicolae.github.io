@@ -1,0 +1,52 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Node/npm (not needed for static site)
+node_modules/
+package-lock.json
+.npm
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+.env.production
+secrets.json
+config.json
+
+# Build artifacts
+dist/
+build/
+*.log
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Credentials and personal files
+credentials.json
+private.json
+api-keys.json
+.git-credentials
+
+# Backup files
+*.bak
+*.backup
+*.swp
+
+# IDE generated files
+*.iml
+.idea/
