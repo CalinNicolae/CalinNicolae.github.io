@@ -27,19 +27,15 @@ export default function initTransitions() {
   /* ── Enter animation (on every page load) ──
      1. Disable transition, snap overlay to fully visible.
      2. Re-enable transition, animate to hidden (wipe up). */
-  window.addEventListener('DOMContentLoaded', () => {
-    setMsg();
-    overlay.style.transition = 'none';
-    overlay.style.clipPath    = 'inset(0 0 0 0)';
-    overlay.style.pointerEvents = 'all';
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        overlay.style.transition   = '';       // restore CSS transition
-        overlay.style.clipPath     = 'inset(0 0 100% 0)';
-        overlay.style.pointerEvents = 'none';
-      });
-    });
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      // bfcache restore: snap overlay hidden immediately, no animation
+      overlay.style.transition    = 'none';
+      overlay.style.clipPath      = 'inset(0 0 100% 0)';
+      overlay.style.pointerEvents = 'none';
+    } else {
+      runEnter(); // normal load: play the wipe animation as before
+    }
   });
 
   /* ── Exit animation (intercept internal link clicks) ──
