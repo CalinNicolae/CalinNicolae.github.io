@@ -1,11 +1,11 @@
-# Calin Mihai Nicolae — Cybersecurity Portfolio
+# Calin Mihai Nicolae personal portfolio
 
-Personal e-portfolio and blog built for the Howest Professional Networking
+Personal e-portfolio and blog built for both personal use and the Howest Professional Networking
 module (2025–2026). Covers attended events, hackathons, security research,
 and professional development as a Cybersecurity student.
 
 ## Live Site
-> [your-username].github.io/portfolio
+> https://calinnicolae.github.io/
 
 ## Tech Stack
 - HTML5, CSS3, Vanilla JavaScript (ES6 modules)
