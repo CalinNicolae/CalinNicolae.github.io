@@ -1,18 +1,85 @@
-/**
- * transitions.js  —  Clip-path page transition system + shared nav behaviour.
- * Usage in every HTML page:
- *   <script type="module">
- *     import initTransitions from './transitions.js';
- *     initTransitions();
- *   </script>
- */
+const MESSAGES = ['> LOADING...', '> ACCESSING...', '> DECRYPTING...', '> MOUNTING...'];
 
-const MESSAGES = [
-  '> LOADING...',
-  '> ACCESSING...',
-  '> DECRYPTING...',
-  '> MOUNTING...',
-];
+function randomMessage() {
+  return MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+}
+
+function snapOverlay(overlay, clipPath) {
+  overlay.style.transition = 'none';
+  overlay.style.clipPath = clipPath;
+  overlay.style.pointerEvents = clipPath === 'inset(0 0 0 0)' ? 'all' : 'none';
+}
+
+function animateOverlay(overlay, clipPath) {
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    overlay.style.transition = '';
+    overlay.style.clipPath = clipPath;
+  }));
+}
+
+function runEnter(overlay, textEl) {
+  if (textEl) textEl.textContent = randomMessage();
+  snapOverlay(overlay, 'inset(0 0 0 0)');
+  animateOverlay(overlay, 'inset(0 0 100% 0)');
+  overlay.style.pointerEvents = 'none';
+}
+
+function hideOverlay(overlay) {
+  overlay.style.transition = 'none';
+  overlay.style.clipPath = 'inset(0 0 100% 0)';
+  overlay.style.pointerEvents = 'none';
+}
+
+function onPageShow(overlay, textEl, e) {
+  if (e.persisted) {
+    hideOverlay(overlay);
+  } else {
+    runEnter(overlay, textEl);
+  }
+}
+
+function isInternalHref(href) {
+  return href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('http');
+}
+
+function onLinkClick(overlay, textEl, e) {
+  const anchor = e.target.closest('a[href]');
+  if (!anchor) return;
+  const href = anchor.getAttribute('href');
+  if (!isInternalHref(href)) return;
+
+  e.preventDefault();
+  if (textEl) textEl.textContent = randomMessage();
+  snapOverlay(overlay, 'inset(0 100% 0 0)');
+  animateOverlay(overlay, 'inset(0 0 0 0)');
+  setTimeout(() => { window.location.href = href; }, 420);
+}
+
+function initNav() {
+  const toggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!toggle || !navLinks) return;
+
+  toggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  navLinks.addEventListener('click', e => {
+    if (e.target.tagName !== 'A') return;
+    navLinks.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  });
+}
+
+function initActiveLink() {
+  const cur = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if (a.getAttribute('href').split('/').pop() === cur) a.classList.add('active');
+  });
+}
 
 export default function initTransitions() {
   const overlay = document.getElementById('page-transition');
@@ -20,74 +87,8 @@ export default function initTransitions() {
 
   const textEl = overlay.querySelector('.transition-text');
 
-  function setMsg() {
-    if (textEl) textEl.textContent = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
-  }
-
-  /* ── Enter animation (on every page load) ──
-     1. Disable transition, snap overlay to fully visible.
-     2. Re-enable transition, animate to hidden (wipe up). */
-  window.addEventListener('pageshow', (e) => {
-    if (e.persisted) {
-      // bfcache restore: snap overlay hidden immediately, no animation
-      overlay.style.transition    = 'none';
-      overlay.style.clipPath      = 'inset(0 0 100% 0)';
-      overlay.style.pointerEvents = 'none';
-    } else {
-      runEnter(); // normal load: play the wipe animation as before
-    }
-  });
-
-  /* ── Exit animation (intercept internal link clicks) ──
-     1. Wipe in from right.
-     2. After 420ms, navigate. */
-  document.addEventListener('click', (e) => {
-    const anchor = e.target.closest('a[href]');
-    if (!anchor) return;
-    const href = anchor.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http')) return;
-
-    e.preventDefault();
-    setMsg();
-
-    // Snap to right-clipped (invisible), then transition to fully visible
-    overlay.style.transition    = 'none';
-    overlay.style.clipPath      = 'inset(0 100% 0 0)';
-    overlay.style.pointerEvents = 'all';
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        overlay.style.transition = '';
-        overlay.style.clipPath   = 'inset(0 0 0 0)';
-      });
-    });
-
-    setTimeout(() => { window.location.href = href; }, 420);
-  });
-
-  /* ── Hamburger → X toggle ── */
-  const toggle   = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-
-  if (toggle && navLinks) {
-    toggle.addEventListener('click', () => {
-      const open = navLinks.classList.toggle('open');
-      toggle.classList.toggle('open', open);
-      toggle.setAttribute('aria-expanded', String(open));
-    });
-
-    navLinks.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A') {
-        navLinks.classList.remove('open');
-        toggle.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
-
-  /* ── Active nav link ── */
-  const cur = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    if (a.getAttribute('href').split('/').pop() === cur) a.classList.add('active');
-  });
+  window.addEventListener('pageshow', e => onPageShow(overlay, textEl, e));
+  document.addEventListener('click', e => onLinkClick(overlay, textEl, e));
+  initNav();
+  initActiveLink();
 }
