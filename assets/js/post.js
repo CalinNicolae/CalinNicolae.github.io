@@ -63,7 +63,7 @@ async function renderBody(post) {
       if (!pre.hasAttribute('data-filename')) pre.setAttribute('data-filename', 'code');
     });
   } catch {
-    bodyEl.innerHTML = '<p style="color:var(--text-dim);font-family:var(--font-mono)">Content not available yet.</p>';
+    bodyEl.innerHTML = '<p style="color:var(--text-dim);font-family:var(--font-mono),sans-serif">Content not available yet.</p>';
   }
 }
 

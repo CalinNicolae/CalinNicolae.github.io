@@ -48,7 +48,7 @@ export async function rotatingSub(element, strings, typeSpeed = 60, deleteSpeed 
     }
   }
 
-  cycle();
+  await cycle();
   return () => { stopped = true; };
 }
 

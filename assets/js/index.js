@@ -21,7 +21,7 @@ function renderFeaturedPosts(posts) {
 
 function showFeaturedError() {
   document.getElementById('featured-grid').innerHTML =
-    '<p style="color:var(--text-dim);font-family:var(--font-mono)">Could not load posts.</p>';
+    '<p style="color:var(--text-dim);font-family:var(--font-mono),sans-serif">Could not load posts.</p>';
 }
 
 async function loadFeaturedPosts() {

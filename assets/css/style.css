@@ -913,13 +913,12 @@ nav {
 
 .footer-main {
   max-width: 1100px;
-  margin: 0 auto;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 2rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem;
 }
 
 .footer-left p {
@@ -1102,7 +1101,7 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 0%;
+  width: 0;
   height: 3px;
   background: var(--neon-cyan);
   box-shadow: 0 0 8px var(--neon-cyan), 0 0 16px rgba(0,255,225,0.4);
@@ -1275,8 +1274,7 @@ nav {
   border: 1px solid var(--border-dim);
   border-radius: 4px;
   overflow-x: auto;
-  padding: 20px;
-  padding-top: 36px;
+  padding: 36px 20px 20px;
   position: relative;
   margin: 1.5rem 0;
 }

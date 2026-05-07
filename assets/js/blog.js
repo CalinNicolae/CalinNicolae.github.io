@@ -83,7 +83,7 @@ function buildFilterBar(posts) {
 
 function showLoadError() {
   document.getElementById('post-list').innerHTML =
-    `<p style="color:var(--text-dim);font-family:var(--font-mono);padding:2rem">Could not load posts.</p>`;
+    `<p style="color:var(--text-dim);font-family:var(--font-mono),sans-serif;padding:2rem">Could not load posts.</p>`;
 }
 
 async function init() {
