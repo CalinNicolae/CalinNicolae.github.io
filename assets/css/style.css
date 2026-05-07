@@ -1690,7 +1690,7 @@ nav {
   width: calc(50% - 50px);
   background: var(--bg-card);
   border: 1px solid var(--border-dim);
-  padding: 1.1rem 1.25rem;
+  padding: 1.1rem 3.5rem;
   flex-shrink: 0;
 }
 
