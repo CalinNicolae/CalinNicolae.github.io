@@ -1847,6 +1847,17 @@ nav {
   .about-avatar     { max-width: 280px; }
 }
 
+/* Zoom cursor enhancement for profile photo */
+.profile-photo {
+  cursor: zoom-in;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.profile-photo:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 8px var(--neon-cyan));
+}
+
 /* ============================================================
    RESPONSIVE — MOBILE (max 768px)
    ============================================================ */
