@@ -86,11 +86,3 @@ export function glitchOnce(element, duration = 800) {
   const original = element.textContent;
   requestAnimationFrame(glitchFrame(element, original, performance.now(), duration));
 }
-
-export function createCursor() {
-  const span = document.createElement('span');
-  span.className = 'cursor';
-  span.textContent = '|';
-  span.style.cssText = 'animation: blink 1s step-end infinite; color: var(--neon-cyan);';
-  return span;
-}
