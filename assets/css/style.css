@@ -405,7 +405,7 @@ nav {
   color: var(--text-dim);
   margin-left: auto;
   margin-right: auto;
-  padding-right: 26px;
+  padding-left: 30px;
 }
 
 .boot-terminal-body {

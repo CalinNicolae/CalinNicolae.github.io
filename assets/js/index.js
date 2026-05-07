@@ -44,8 +44,11 @@ function revealHero(bootEl, heroEl, nameEl, typeEl) {
       'Cybersecurity Student',
       'CTF Player',
       'Penetration Tester',
-      'Security Researcher',
       'Ethical Hacker',
+      'System Defender',
+      'Dedicated Gamer',
+      'Researcher',
+      'The Honored One',
     ]);
   }, 350);
 }
@@ -59,8 +62,8 @@ async function runBootSequence() {
 
   await terminalBoot(bodyEl, [
     { text: '> Initializing profile...', className: 'boot-terminal-line' },
-    { text: '> Loading credentials...',  className: 'boot-terminal-line' },
-    { text: '> ACCESS GRANTED.',         className: 'boot-terminal-line boot-line-green' },
+    { text: '> Loading variables...',  className: 'boot-terminal-line' },
+    { text: '> SUCCESS...',         className: 'boot-terminal-line boot-line-green' },
   ], 400);
 
   revealHero(bootEl, heroEl, nameEl, typeEl);
