@@ -468,6 +468,7 @@ nav {
   gap: 1.25rem;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .hero-btn {
@@ -941,6 +942,7 @@ nav {
   transition: color var(--transition-fast);
   text-decoration: none;
   text-shadow: none;
+  font-size: 100px;
 }
 
 .footer-icon:hover {

@@ -47,7 +47,7 @@ function revealHero(bootEl, heroEl, nameEl, typeEl) {
       'Ethical Hacker',
       'System Defender',
       'Dedicated Gamer',
-      'Researcher',
+      'Security Researcher',
       'The Honored One',
     ]);
   }, 350);
