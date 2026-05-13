@@ -72,6 +72,21 @@ function initNav() {
     toggle.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
   });
+  makeNavItemsFullClickable();
+}
+
+function makeNavItemsFullClickable() {
+  const listItems = document.querySelectorAll('.nav-links li');
+  listItems.forEach(li => {
+    const anchor = li.querySelector('a');
+    if (!anchor) return;
+    li.addEventListener('click', (event) => {
+      // If the click was directly on the <a>, let it handle normally
+      if (event.target === anchor || anchor.contains(event.target)) return;
+      // Otherwise, trigger the anchor click
+      anchor.click();
+    });
+  });
 }
 
 function initActiveLink() {
