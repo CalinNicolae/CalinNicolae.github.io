@@ -1,4 +1,4 @@
-const MESSAGES = ['> LOADING...', '> ACCESSING...', '> DECRYPTING...', '> MOUNTING...'];
+const MESSAGES = ['> LOADING...', '> DECRYPTING...', '> MOUNTING...'];
 
 function randomMessage() {
   return MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
