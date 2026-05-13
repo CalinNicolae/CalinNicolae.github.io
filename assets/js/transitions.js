@@ -92,3 +92,5 @@ export default function initTransitions() {
   initNav();
   initActiveLink();
 }
+
+initTransitions();
