@@ -31,11 +31,12 @@ function hideOverlay(overlay) {
 }
 
 function onPageShow(overlay, textEl, e) {
-  if (e.persisted) {
-    hideOverlay(overlay);
-  } else {
-    runEnter(overlay, textEl);
-  }
+  // if (e.persisted) {
+  //   hideOverlay(overlay);
+  // } else {
+  //   runEnter(overlay, textEl);
+  // }
+  hideOverlay(overlay);
 }
 
 function isInternalHref(href) {

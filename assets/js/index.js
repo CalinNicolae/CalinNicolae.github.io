@@ -59,7 +59,9 @@ async function runBootSequence() {
   const heroEl = document.getElementById('hero-content');
   const nameEl = document.getElementById('hero-name');
   const typeEl = document.getElementById('typewriter-text');
-
+  bootEl.style.display = 'none';
+  heroEl.style.opacity = '1';
+  heroEl.style.pointerEvents = 'auto';
   await terminalBoot(bodyEl, [
     { text: '> Initializing profile...', className: 'boot-terminal-line' },
     { text: '> Loading variables...',  className: 'boot-terminal-line' },
