@@ -6,8 +6,8 @@ const NAV_HTML = `
   <span class="hamburger-line"></span>
 </button>
 <ul class="nav-links">
-  <li><a href="./blog.html">BLOG</a></li>
   <li><a href="./about.html">ABOUT</a></li>
+  <li><a href="./blog.html">BLOG</a></li>
 </ul>
 `;
 
