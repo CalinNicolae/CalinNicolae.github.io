@@ -11,7 +11,6 @@
     "excerpt": "Just an IDE, Claude Code, and GitHub pages. Here is how this portfolio was built and how new posts are added.",
     "readTime": "4 min",
     "coverImage": "assets/images/img.png",
-    "coverCaption": "The repository structure — every post is a JSON entry and an HTML file.",
     "content": "post-content/how-this-site-was-built.html"
   },
   {

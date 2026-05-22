@@ -99,7 +99,7 @@ function renderRelated(posts, post) {
   const related = pickRelated(posts, post);
   if (related.length === 0) return;
   document.getElementById('related-section').style.display = '';
-  document.getElementById('related-label').textContent = `> related_posts --category [${post.category}]`;
+  document.getElementById('related-label').textContent = "> ls related_posts";
   document.getElementById('related-grid').innerHTML = related.map(relatedCardHTML).join('');
 }
 
