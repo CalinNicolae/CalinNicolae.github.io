@@ -39,6 +39,9 @@
     "tags": ["dotNET", "Development", "Architecture"],
     "required": false,
     "blockingFactor": 2,
+    "speakerName": "Kevin DeRudder · .NET Expert",
+    "speakerBio": "Full stack web developer with a deep passion for ASP.NET and building modern, interactive web applications. With years of experience in web development and .NET, he helps developers simplify their web apps while keeping them fast, maintainable. As a conference organizer and speaker, Kevin loves sharing practical insights on web development and fostering learning communities. When he’s not coding or speaking, he’s busy running Techorama and other developer events.",
+
     "excerpt": "A deep dive into .NET 10 features, performance tuning, and cloud-ready architecture.",
     "readTime": "2 minutes",
     "eventName": ".NET 10 Demystified",
@@ -57,17 +60,15 @@
     "required": false,
     "blockingFactor": 4,
     "excerpt": "IPv4 exhaustion is no longer theoretical. This session covered dual-stack deployments, migration strategy, and the security implications of IPv6.",
-    "readTime": "3 min",
-    "wordCount": 303,
-    "speakerName": "Nico Declerck",
+    "readTime": "2 minutes",
     "speakerBio": "Networking expert with deep practical experience in IPv6 migration and infrastructure planning.",
     "eventName": "Tech & Meet — IPv6",
     "eventFrequency": "Annual",
     "wouldAttendAgain": true,
     "coverImage": "assets/images/ipv6tech.jpg",
     "gallery": [
-      { "src": "assets/images/ipv6tech.jpg", "caption": "Photo taken by me" },
-      { "src": "assets/images/ipv6tech1.jpg", "caption": "2nd photo taken by me" }
+      { "src": "assets/images/ipv6tech.jpg"},
+      { "src": "assets/images/ipv6tech1.jpg"}
     ],
     "content": "post-content/event-03.html"
   },

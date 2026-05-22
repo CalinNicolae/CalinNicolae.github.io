@@ -81,7 +81,6 @@ function renderGallery(post) {
   document.getElementById('gallery-grid').innerHTML = post.gallery.map(img =>
     `<figure>
       <img src="${img.src}" alt="${img.caption}" loading="lazy">
-      <figcaption>${img.caption}</figcaption>
     </figure>`
   ).join('');
 }
