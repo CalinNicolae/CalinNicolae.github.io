@@ -71,8 +71,8 @@ function renderVerdict(post) {
   if (typeof post.wouldAttendAgain !== 'boolean') return;
   document.getElementById('post-verdict').style.display = '';
   document.getElementById('verdict-text').innerHTML = post.wouldAttendAgain
-    ? 'Would attend again: <span class="verdict-yes">YES ✓</span>'
-    : 'Would attend again: <span class="verdict-no">NO ✗</span>';
+    ? 'Would I attend this again? <span class="verdict-yes">YES ✓</span>'
+    : 'Would I attend this again? <span class="verdict-no">NO ✗</span>';
 }
 
 function renderGallery(post) {
