@@ -21,7 +21,6 @@ function buildModal(imgSrc, imgAlt) {
     <div id="photo-modal-backdrop"></div>
     <div id="photo-modal-container">
       <button id="photo-modal-close" aria-label="Close photo">[&times;]</button>
-      <div id="photo-modal-hint">scroll / pinch to zoom · drag to pan</div>
       <div id="photo-modal-viewport">
         <img id="photo-modal-img" src="${imgSrc}" alt="${imgAlt}" draggable="false">
       </div>
