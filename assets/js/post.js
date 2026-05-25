@@ -1,14 +1,3 @@
-function relatedCardHTML(post) {
-  return `
-    <a class="featured-card" href="./post.html?id=${post.id}">
-      <span class="tag">[${post.category}]</span>
-      <h3 class="featured-card-title">${post.title}</h3>
-      <span class="featured-card-date">${post.date}</span>
-      <p class="featured-card-excerpt">${post.excerpt}</p>
-      <div class="featured-card-footer">&gt;&gt; READ MORE <span class="featured-card-arrow">→</span></div>
-    </a>`;
-}
-
 function getPostId() {
   return new URLSearchParams(window.location.search).get('id');
 }
@@ -77,21 +66,49 @@ function renderGallery(post) {
   ).join('');
 }
 
-function pickRelated(posts, post) {
-  const sameCat = posts.filter(p => p.category === post.category && p.id !== post.id);
-  const others  = [...posts]
-    .filter(p => p.id !== post.id)
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .filter(p => !sameCat.find(r => r.id === p.id));
-  return [...sameCat, ...others].slice(0, 3);
+function parseDate(dateStr) {
+  if (!dateStr) return new Date(0);
+  const parts = dateStr.split('/');
+  if (parts.length !== 3) return new Date(dateStr);
+  const day = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1;
+  const year = parseInt(parts[2], 10);
+  return new Date(year, month, day);
+}
+function sortByDate(posts) {
+  return [...posts].sort((a, b) => parseDate(b.date) - parseDate(a.date));
 }
 
-function renderRelated(posts, post) {
-  const related = pickRelated(posts, post);
-  if (related.length === 0) return;
-  document.getElementById('related-section').style.display = '';
-  document.getElementById('related-label').textContent = "> ls related_posts";
-  document.getElementById('related-grid').innerHTML = related.map(relatedCardHTML).join('');
+function renderPrevNext(currentPost, allPostsSorted) {
+  const currentIndex = allPostsSorted.findIndex(p => p.id === currentPost.id);
+  if (currentIndex === -1) return;
+
+  const prevPost = currentIndex > 0 ? allPostsSorted[currentIndex - 1] : null;
+  const nextPost = currentIndex < allPostsSorted.length - 1 ? allPostsSorted[currentIndex + 1] : null;
+
+  const prevLink = document.getElementById('prev-post-link');
+  const nextLink = document.getElementById('next-post-link');
+
+  if (prevPost) {
+    prevLink.href = `./post.html?id=${prevPost.id}`;
+    prevLink.style.display = 'inline-block';
+  } else {
+    prevLink.style.display = 'none';
+  }
+
+  if (nextPost) {
+    nextLink.href = `./post.html?id=${nextPost.id}`;
+    nextLink.style.display = 'inline-block';
+  } else {
+    nextLink.style.display = 'none';
+  }
+
+  const section = document.getElementById('post-navigation-section');
+  if (prevPost || nextPost) {
+    section.style.display = 'block';
+  } else {
+    section.style.display = 'none';
+  }
 }
 
 function updateScrollBar() {
@@ -121,7 +138,8 @@ async function loadPost() {
   renderSpeaker(post);
   await renderBody(post);
   renderGallery(post);
-  renderRelated(posts, post);
+  const sortedPosts = sortByDate(posts);
+  renderPrevNext(post, sortedPosts);
 }
 
 window.addEventListener('scroll', updateScrollBar, { passive: true });
