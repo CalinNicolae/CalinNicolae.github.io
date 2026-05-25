@@ -1,39 +1,56 @@
-# Calin Mihai Nicolae personal portfolio
+# Professional networking portfolio
 
-Personal e-portfolio and blog built for both personal use and the Howest Professional Networking
-module (2025–2026). Covers attended events, hackathons, security research,
-and professional development as a Cybersecurity student.
+This is my personal ePortfolio built for the Howest Professional Networking module (academic year 2025-2026). The site documents attendance at IT events, a hackathon, and other professional activities required by the module. It is hand-coded with HTML, CSS, and vanilla JavaScript. No framework, no build step, no dependencies. Hosted on GitHub Pages.
 
-## Live Site
-> https://calinnicolae.github.io/
+---
 
-## Tech Stack
-- HTML5, CSS3, Vanilla JavaScript (ES6 modules)
-- No frameworks, no build tools, no dependencies
-- Hosted on GitHub Pages
+## Table of contents
 
-## Project Structure
+- [Tech stack](#tech-stack)
+- [Live site](#live-site)
+- [How to add a new post](#how-to-add-a-new-post)
+- [Module requirements status](#module-requirements-status)
+
+---
+
+## Tech stack
+
+| Layer           | Technology |
+|-----------------|---|
+| Markup          | HTML5, semantic and accessible |
+| Styling         | CSS3 with custom properties, no preprocessor |
+| Behaviour       | Vanilla JavaScript ES6 modules |
+| Fonts           | Google Fonts: JetBrains Mono, Syne |
+| Hosting         | GitHub Pages |
+| Version control | Git, main branch |
+
+---
+
+## Live site
 ```
-portfolio/
-├── index.html          Homepage
-├── blog.html           Blog listing
-├── post.html           Single post template (reads ?id= from URL)
-├── about.html          About & CV
-├── 404.html            Custom 404 page
-├── style.css           Global design system
-├── terminal.js         Typewriter & glitch animations
-├── transitions.js      Page transition system
-├── data/posts.json     Blog post metadata
-├── post-content/       Post body HTML files
-└── assets/images/      Photos and media
+https://calinnicolae.github.io
 ```
+---
 
-## Adding a New Post
-1. Add an entry to `data/posts.json` with a unique `id`
-2. Create the body content in `post-content/[id].html`
-3. Add images to `assets/images/`
-4. Commit and push — GitHub Pages deploys automatically
+## How to add a new post
 
-## Module Context
-Built for the Howest Professional Networking module (Gene Vangampelaere).
-E-portfolio section counts for 60% of the module grade.
+1. Create a new HTML fragment in `post-content/` containing only the body content, no `<html>` or `<body>` tags.
+
+2. Add a new object to `data/posts.json`. See the [posts.json documentation](./POSTS_JSON.md) for all available fields.
+
+3. Add any cover or gallery images to `assets/images/`.
+
+4. Commit and push. GitHub Pages rebuilds automatically within a minute or two.
+
+No build step is required. The site reads `posts.json` at runtime.
+
+---
+
+## Module requirements status
+
+| Requirement | Status |
+|---|---|
+| Website explanation post | Complete (how-this-site-was-built) |
+| Minimum four physical event reflections | Complete (five events: Phishathon, .NET 10, IPv6, NATO, DeepSeek) |
+| Podcast episode | Recorded and posted (IT-podcast) |
+| LinkedIn profile enhancement reflection | Pending |
