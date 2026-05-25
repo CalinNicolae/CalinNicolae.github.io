@@ -1,5 +1,5 @@
 let allPosts = [];
-let activeFilter = 'ALL';
+let activeCategories = new Set();
 
 function coverHTML(post) {
   if (post.coverImage) {
@@ -32,18 +32,30 @@ function postCardHTML(post, delay) {
     </a>`;
 }
 
-function filterPosts(filter) {
-  return filter === 'ALL' ? allPosts : allPosts.filter(p => p.category === filter);
+function parseDate(dateStr) {
+  if (!dateStr) return new Date(0);
+  const parts = dateStr.split('/');
+  if (parts.length !== 3) return new Date(dateStr);
+  const day = parseInt(parts[0], 10);
+  const month = parseInt(parts[1], 10) - 1;
+  const year = parseInt(parts[2], 10);
+  return new Date(year, month, day);
+}
+
+function filterPosts() {
+  if (activeCategories.size === 0 || activeCategories.has('ALL')) return allPosts;
+  return allPosts.filter(p => activeCategories.has(p.category));
 }
 
 function sortByDate(posts) {
-  return [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
+  return [...posts].sort((a, b) => parseDate(b.date) - parseDate(a.date));
 }
 
-function renderPosts(filter) {
+function renderPosts() {
   const listEl   = document.getElementById('post-list');
   const emptyEl  = document.getElementById('empty-state');
-  const sorted   = sortByDate(filterPosts(filter));
+  const filtered = filterPosts();
+  const sorted   = sortByDate(filtered);
 
   if (sorted.length === 0) {
     listEl.innerHTML = '';
@@ -66,24 +78,51 @@ function renderPosts(filter) {
 function onFilterClick(e) {
   const pill = e.target.closest('.filter-pill');
   if (!pill) return;
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  pill.classList.add('active');
-  activeFilter = pill.dataset.filter;
-  renderPosts(activeFilter);
+
+  const category = pill.dataset.filter;
+  if (category === 'ALL') {
+    activeCategories.clear();
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+  } else {
+    const allPill = document.querySelector('.filter-pill[data-filter="ALL"]');
+    if (allPill && allPill.classList.contains('active')) {
+      allPill.classList.remove('active');
+      activeCategories.delete('ALL');
+    }
+
+    if (activeCategories.has(category)) {
+      activeCategories.delete(category);
+      pill.classList.remove('active');
+    } else {
+      activeCategories.add(category);
+      pill.classList.add('active');
+    }
+  }
+
+  if (activeCategories.size === 0) {
+    const allPill = document.querySelector('.filter-pill[data-filter="ALL"]');
+    if (allPill) {
+      allPill.classList.add('active');
+      activeCategories.add('ALL');
+    }
+  }
+
+  renderPosts();
 }
 
 function buildFilterBar(posts) {
   const bar = document.getElementById('filter-bar');
   const categories = ['ALL', ...new Set(posts.map(p => p.category))];
   bar.innerHTML = categories.map(cat =>
-    `<button class="filter-pill ${cat === 'ALL' ? 'active' : ''}" data-filter="${cat}">[${cat}]</button>`
+      `<button class="filter-pill ${cat === 'ALL' ? 'active' : ''}" data-filter="${cat}">[${cat}]</button>`
   ).join('');
   bar.addEventListener('click', onFilterClick);
 }
 
 function showLoadError() {
   document.getElementById('post-list').innerHTML =
-    `<p style="color:var(--text-dim);font-family:var(--font-mono),sans-serif;padding:2rem">Could not load posts.</p>`;
+      `<p style="color:var(--text-dim);font-family:var(--font-mono),sans-serif;padding:2rem">Could not load posts.</p>`;
 }
 
 async function init() {
@@ -91,7 +130,8 @@ async function init() {
     const res = await fetch('./data/posts.json');
     allPosts  = await res.json();
     buildFilterBar(allPosts);
-    renderPosts('ALL');
+    activeCategories.add('ALL');
+    renderPosts();
   } catch {
     showLoadError();
   }
