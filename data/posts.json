@@ -11,7 +11,7 @@
     "content": "post-content/how-this-site-was-built.html"
   },
   {
-    "id": "event-01",
+    "id": "phishathon-2025",
     "title": "Phishathon 2025 - Social engineering in practice",
     "date": "06/11/2025",
     "category": "Hackathon",
@@ -23,7 +23,7 @@
     "content": "post-content/event-01.html"
   },
   {
-    "id": "event-02",
+    "id": ".net10-demystified",
     "title": ".NET 10 Demystified",
     "date": "18/11/2025",
     "category": "Tech & Meet",
@@ -37,7 +37,7 @@
     "content": "post-content/event-02.html"
   },
   {
-    "id": "event-03",
+    "id": "transitioning-to-ipv6",
     "title": "Transitioning to IPv6",
     "date": "25/11/2025",
     "speakerName": "Nico Declerck",
@@ -55,7 +55,7 @@
     "content": "post-content/event-03.html"
   },
   {
-    "id": "event-04",
+    "id": "nato-cyber-defence",
     "title": "NATO Cyber Defence",
     "date": "02/12/2025",
     "category": "Tech & Meet",
@@ -69,7 +69,7 @@
     "content": "post-content/event-04.html"
   },
   {
-    "id": "event-05",
+    "id": "deepseek",
     "title": "DeepSeek and the future of AI",
     "date": "09/12/2025",
     "category": "Tech & Meet",
@@ -87,7 +87,7 @@
     "content": "post-content/event-05.html"
   },
   {
-    "id": "IT-podcast",
+    "id": "it-podcast",
     "title": "The rapid evolution and impact of AI tools",
     "date": "27/04/2026",
     "category": "Podcast",
@@ -96,5 +96,16 @@
     "readTime": "4 minutes",
     "coverImage": "assets/images/spotify.png",
     "content": "post-content/IT-podcast.html"
+  },
+  {
+    "id": "linkedin",
+    "title": "Building a professional LinkedIn profile",
+    "date": "25/05/2026",
+    "category": "Professional Development",
+    "tags": ["LinkedIn", "Networking", "Career", "Professional Presence"],
+    "readTime": "4 minutes",
+    "coverImage": "assets/images/linkedin.png",
+    "content": "post-content/linkedin-presence.html",
+    "excerpt": "Reflecting on building an authentic LinkedIn profile as part of the Professional Networking module. Why it matters more than it seems, and what I learned about professional identity."
   }
 ]

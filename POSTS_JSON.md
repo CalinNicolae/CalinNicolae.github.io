@@ -43,4 +43,4 @@ There is no schema validation at runtime. The JavaScript assumes the JSON is wel
 - `content` must point to an existing, fetchable file. A missing file shows a fallback message rather than crashing.
 - `coverImage` must point to an existing image. A missing image shows the browser's broken image icon.
 - `gallery[].src` must point to an existing image for the same reason.
-- `date` values should be parseable by `new Date()` for reliable sort order. ISO 8601 (`YYYY-MM-DD`) is the safest format.
+- `date` values should be parseable by `new Date()` for reliable sort order.

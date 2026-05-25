@@ -48,9 +48,10 @@ No build step is required. The site reads `posts.json` at runtime.
 
 ## Module requirements status
 
-| Requirement | Status |
-|---|---|
-| Website explanation post | Complete (how-this-site-was-built) |
-| Minimum four physical event reflections | Complete (five events: Phishathon, .NET 10, IPv6, NATO, DeepSeek) |
-| Podcast episode | Recorded and posted (IT-podcast) |
-| LinkedIn profile enhancement reflection | Pending |
+| Requirement                             | Status                                                           |
+|-----------------------------------------|------------------------------------------------------------------|
+| Website explanation post                | Complete                                |
+| Minimum four physical event reflections | Complete |
+| Podcast episode                         | Recorded and posted                                 |
+| LinkedIn profile enhancement reflection | Complete                                                         |
+| One hackathon post                      | Complete                                                         |
