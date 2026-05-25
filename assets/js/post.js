@@ -21,7 +21,7 @@ function show404(id) {
 }
 
 function updatePageMeta(post) {
-  document.title = `${post.title} — Portfolio`;
+  document.title = post.title;
   document.querySelector('meta[name="description"]').content = post.excerpt;
 }
 
