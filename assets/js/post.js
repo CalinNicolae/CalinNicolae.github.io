@@ -67,14 +67,6 @@ async function renderBody(post) {
   }
 }
 
-function renderVerdict(post) {
-  if (typeof post.wouldAttendAgain !== 'boolean') return;
-  document.getElementById('post-verdict').style.display = '';
-  document.getElementById('verdict-text').innerHTML = post.wouldAttendAgain
-    ? 'Would I attend this again? <span class="verdict-yes">YES ✓</span>'
-    : 'Would I attend this again? <span class="verdict-no">NO ✗</span>';
-}
-
 function renderGallery(post) {
   if (!post.gallery || post.gallery.length === 0) return;
   document.getElementById('gallery-section').style.display = '';
@@ -128,7 +120,6 @@ async function loadPost() {
   renderCover(post);
   renderSpeaker(post);
   await renderBody(post);
-  renderVerdict(post);
   renderGallery(post);
   renderRelated(posts, post);
 }
