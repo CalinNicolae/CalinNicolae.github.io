@@ -163,10 +163,30 @@ function openModal(imgSrc, imgAlt) {
   });
 }
 
-export function initPhotoModal(photoSelector) {
-  const photo = document.querySelector(photoSelector);
-  if (!photo) return;
-  photo.addEventListener('click', () => openModal(photo.src, photo.alt));
+function isZoomableImage(img) {
+  if (img.closest('#photo-modal')) return false;
+  if (img.width < 30 && img.height < 30) return false;
+  if (img.hasAttribute('data-zoomable') && img.getAttribute('data-zoomable') === 'false') return false;
+  if (img.closest('.footer-icons, .nav-links, .nav-logo, .hero-btn, .tag, .filter-pill')) return false;
+  const parentLink = img.closest('a');
+  if (parentLink && parentLink.href && !parentLink.href.includes('#')) {
+    return false;
+  }
+  return true;
 }
 
-initPhotoModal('.profile-photo')
+function initGlobalPhotoModal() {
+  document.body.addEventListener('click', (e) => {
+    const img = e.target.closest('img');
+    if (!img) return;
+    if (!isZoomableImage(img)) return;
+    e.preventDefault();
+    openModal(img.src, img.alt || 'Photo');
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGlobalPhotoModal);
+} else {
+  initGlobalPhotoModal();
+}
