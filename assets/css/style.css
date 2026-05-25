@@ -1170,7 +1170,7 @@ nav {
 
 .post-cover-img {
   width: 100%;
-  max-height: 400px;
+  max-height: 40rem;
   object-fit: cover;
   display: block;
   border: 1px solid var(--border-dim);
