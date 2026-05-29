@@ -933,6 +933,7 @@ nav {
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  padding-left: 0.6rem;
 }
 
 .footer-icon {
