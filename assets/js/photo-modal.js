@@ -149,6 +149,7 @@ function openModal(imgSrc, imgAlt) {
   initMouseZoom(viewport, img, state);
   initMouseDrag(viewport, img, state);
   initTouchGestures(viewport, img, state);
+  initDoubleClickZoom(viewport, img, state);
 
   closeBtn.addEventListener('click', () => closeModal(modal, state, img));
   backdrop.addEventListener('click', () => closeModal(modal, state, img));
@@ -172,6 +173,47 @@ function isZoomableImage(img) {
     return false;
   }
   return true;
+}
+
+function initDoubleClickZoom(viewport, img, state) {
+  const ZOOM_IN_SCALE = 2;  // You can adjust this value (2 = 200%)
+
+  viewport.addEventListener('dblclick', (e) => {
+    e.preventDefault();
+
+    if (state.scale === MIN_SCALE) {
+      // Zoom in to ZOOM_IN_SCALE
+      state.scale = ZOOM_IN_SCALE;
+
+      // Get click coordinates relative to the image
+      const rect = img.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      // Convert to relative position within the image (0..1)
+      const relX = clickX / rect.width;
+      const relY = clickY / rect.height;
+
+      // Calculate new pan offsets so that the clicked point stays under the cursor
+      const maxX = (img.naturalWidth * state.scale - viewport.clientWidth) / 2;
+      const maxY = (img.naturalHeight * state.scale - viewport.clientHeight) / 2;
+      let targetX = (relX - 0.5) * (img.naturalWidth * state.scale - viewport.clientWidth);
+      let targetY = (relY - 0.5) * (img.naturalHeight * state.scale - viewport.clientHeight);
+      targetX = clamp(targetX, -maxX, maxX);
+      targetY = clamp(targetY, -maxY, maxY);
+
+      state.x = targetX;
+      state.y = targetY;
+    } else {
+      // Reset to full view
+      state.scale = MIN_SCALE;
+      state.x = 0;
+      state.y = 0;
+    }
+
+    applyTransform(img, state.scale, state.x, state.y);
+    viewport.style.cursor = state.scale > MIN_SCALE ? 'grab' : 'default';
+  });
 }
 
 function initGlobalPhotoModal() {
