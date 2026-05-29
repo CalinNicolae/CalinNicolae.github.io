@@ -1574,7 +1574,6 @@ nav {
 }
 
 .bio-intro {
-  font-family: var(--font-body);
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
   color: var(--text-bright);
@@ -1909,7 +1908,9 @@ nav {
   .post-hero-overlay { padding: 1.5rem; }
   .post-body         { padding: 2rem 1rem; }
 }
-
+.stack{
+  font-weight: 600;
+}
 @media (max-width: 520px) {
   .post-list-item { flex-direction: column; }
   .post-list-img-wrap,
