@@ -1,5 +1,16 @@
 [
   {
+    "id": "eniris-internship",
+    "title": "My internship at Eniris: IoT device drivers and a SIEM proof of concept",
+    "date": "13/05/2026",
+    "category": "Experience",
+    "tags": ["Internship", "IoT", "Python", "Cybersecurity", "SIEM", "Eniris", "Internship"],
+    "excerpt": "Three months at Eniris: writing Python device integrations for the SmartgridOne platform and building an Elastic Stack SIEM proof of concept for the cybersecurity team.",
+    "readTime": "3 minutes",
+    "coverImage": "assets/images/eniris.jpg",
+    "content": "post-content/eniris-internship.html"
+  },
+  {
     "id": "how-this-site-was-built",
     "title": "How I built this website - from scratch with HTML, CSS & Javascript",
     "date": "21/04/2026",
