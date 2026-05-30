@@ -3,7 +3,7 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-
+.claude/
 # IDE and editor files
 .idea/
 .vscode/
