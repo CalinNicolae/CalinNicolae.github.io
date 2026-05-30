@@ -1,3 +1,5 @@
+import { sortByDate } from './util.js';
+
 function getPostId() {
   return new URLSearchParams(window.location.search).get('id');
 }
@@ -11,7 +13,10 @@ function show404(id) {
 
 function updatePageMeta(post) {
   document.title = post.title;
-  document.querySelector('meta[name="description"]').content = post.excerpt;
+  const set = (sel, val) => { const el = document.querySelector(sel); if (el) el.content = val; };
+  set('meta[name="description"]', post.excerpt || '');
+  set('meta[property="og:title"]', post.title);
+  set('meta[property="og:description"]', post.excerpt || '');
 }
 
 function renderHeader(post) {
@@ -64,19 +69,6 @@ function renderGallery(post) {
       <img src="${img.src}" alt="${img.caption}" loading="lazy">
     </figure>`
   ).join('');
-}
-
-function parseDate(dateStr) {
-  if (!dateStr) return new Date(0);
-  const parts = dateStr.split('/');
-  if (parts.length !== 3) return new Date(dateStr);
-  const day = parseInt(parts[0], 10);
-  const month = parseInt(parts[1], 10) - 1;
-  const year = parseInt(parts[2], 10);
-  return new Date(year, month, day);
-}
-function sortByDate(posts) {
-  return [...posts].sort((a, b) => parseDate(b.date) - parseDate(a.date));
 }
 
 function renderPrevNext(currentPost, allPostsSorted) {
