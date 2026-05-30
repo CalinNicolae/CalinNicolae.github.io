@@ -1,0 +1,61 @@
+<h2>About the internship</h2>
+<p>From 9 February to 13 May 2026 I did my internship at Eniris, an energy
+    management company behind SmartgridOne, a platform that manages distributed energy
+    resources like batteries, solar inverters, EV chargers, and heat pumps. Eniris builds
+    its product around being vendor-independent, so the platform relies on how well
+    it talks to hardware from hundreds of different manufacturers. My internship ran on two
+    tracks at once: writing Python integrations for those devices, and working with the
+    newly formed cybersecurity team on the company's path toward NIS2 and ISO 27001
+    compliance.</p>
+
+<h2>Building device integrations</h2>
+<p>Most of my days went into device integrations. Each one is a Python module that runs
+    on the SmartgridOne Controller and bridges a specific device, usually over Modbus, to
+    the Eniris platform. I worked on seven in total. The deepest was the Fairland InverX
+    Elite, a hybrid solar inverter that took about three weeks to get right. Most of that
+    time was register-map debugging, where the values the device returned did not match
+    what the driver expected. The only reliable way to find out why was to read the
+    registers straight off the device with pymodbus and compare them line by line. The fix
+    I am most proud of there was a slow-communication problem, where each read cycle was
+    taking 32 to 34 seconds. Tracking it down meant understanding the polling loop, the
+    framework's scheduling, and a Docker container that was holding the device connection
+    at the same time. Once that was sorted, the cycle dropped to 3 to 4 seconds. The
+    Sunsynk integration taught the opposite lesson: a full delivery cycle from code,
+    through review, to coordinating with a real client and deploying against their
+    hardware.</p>
+
+<h2>The security side: a SIEM proof of concept</h2>
+<p>The cybersecurity half is where my specialisation came in. The team's biggest gap was
+    that Eniris had no centralised logging or monitoring, so if something happened on the
+    production systems, nobody would see it. When the first instinct was to jump straight
+    to picking a SIEM, I argued for building a digital asset inventory first, because you
+    cannot scope a SIEM for assets you have not mapped yet. The team agreed, and that
+    inventory became the first deliverable.</p>
+<p>From there I built a proof of concept around one question: can the Elastic Stack be
+    used as a SIEM solution? An Elastic Agent on a test controller shipped logs over TLS to
+    Elasticsearch and Kibana on a Hetzner server. The interesting part was the network
+    path. Two obvious options were rejected for solid security reasons, so the working
+    design put an Nginx reverse proxy in front of Elasticsearch on port 443, which the
+    firewall already allowed. Until that proxy was in place the agent could reach the
+    network but no logs arrived. After that, the logs started flowing. My answer to the question was
+    yes, with conditions: the free tier gets you started but not finished, the network
+    integration has to be designed up front, and a SIEM is only as good as the detection
+    rules you tune for your own environment.</p>
+
+<h2>Other work, and what I took away</h2>
+<p>Around those two tracks I picked up smaller jobs: reworking how controller VPN
+    addresses were stored, building an HTTP proxy through an FRP tunnel, running a
+    network-layer penetration test against test controllers, and fixing live documentation
+    and front-end bugs. I also recorded an IT podcast with Angelos, a developer on the
+    team, which is on this site as its own post.</p>
+<p>The biggest growth for me was practical. Docker and Linux became my default working
+    environment, I got real hands-on time with the Elastic Stack and with reverse proxies,
+    and I learned where my habit of solving everything myself stops being useful and asking
+    is the better move. The clearest professional lesson was that speaking up with a clear
+    argument can change a project's direction, and the asset-inventory call was the
+    proof.</p>
+
+<h2>Looking ahead</h2>
+<p>I will present this internship project at TI on Stage on 19 June 2026, so this post is
+    also where I start pulling the story together: what I built, what broke, and what I
+    would do differently.</p>
