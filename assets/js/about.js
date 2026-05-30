@@ -10,12 +10,4 @@ function observeTimelineNodes() {
   document.querySelectorAll('.timeline-node').forEach(el => observer.observe(el));
 }
 
-function initContactForm() {
-  document.getElementById('contact-form').addEventListener('submit', e => {
-    e.preventDefault();
-    document.getElementById('contact-success').style.display = 'block';
-  });
-}
-
 observeTimelineNodes();
-initContactForm();
