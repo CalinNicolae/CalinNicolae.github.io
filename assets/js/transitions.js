@@ -17,26 +17,10 @@ function animateOverlay(overlay, clipPath) {
   }));
 }
 
-function runEnter(overlay, textEl) {
-  if (textEl) textEl.textContent = randomMessage();
-  snapOverlay(overlay, 'inset(0 0 0 0)');
-  animateOverlay(overlay, 'inset(0 0 100% 0)');
-  overlay.style.pointerEvents = 'none';
-}
-
 function hideOverlay(overlay) {
   overlay.style.transition = 'none';
   overlay.style.clipPath = 'inset(0 0 100% 0)';
   overlay.style.pointerEvents = 'none';
-}
-
-function onPageShow(overlay, textEl, e) {
-  // if (e.persisted) {
-  //   hideOverlay(overlay);
-  // } else {
-  //   runEnter(overlay, textEl);
-  // }
-  hideOverlay(overlay);
 }
 
 function isInternalHref(href) {
@@ -103,7 +87,7 @@ export default function initTransitions() {
 
   const textEl = overlay.querySelector('.transition-text');
 
-  window.addEventListener('pageshow', e => onPageShow(overlay, textEl, e));
+  window.addEventListener('pageshow', () => hideOverlay(overlay));
   document.addEventListener('click', e => onLinkClick(overlay, textEl, e));
   initNav();
   initActiveLink();

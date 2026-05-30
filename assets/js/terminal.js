@@ -34,37 +34,13 @@ export function deleteText(element, speed = 30) {
 }
 
 export async function rotatingSub(element, strings, typeSpeed = 60, deleteSpeed = 30, pause = 2000) {
-  let stopped = false;
   let idx = 0;
-
-  async function cycle() {
-    while (!stopped) {
-      await typeText(element, strings[idx % strings.length], typeSpeed);
-      await delay(pause);
-      if (stopped) break;
-      await deleteText(element, deleteSpeed);
-      if (stopped) break;
-      idx++;
-    }
+  while (true) {
+    await typeText(element, strings[idx % strings.length], typeSpeed);
+    await delay(pause);
+    await deleteText(element, deleteSpeed);
+    idx++;
   }
-
-  await cycle();
-  return () => { stopped = true; };
-}
-
-function appendLine(container, text, className) {
-  const div = document.createElement('div');
-  if (className) div.className = className;
-  container.appendChild(div);
-  return typeText(div, text, 42);
-}
-
-export function terminalBoot(container, lines, lineDelay = 300) {
-  return lines.reduce((chain, line) => {
-    return chain
-        .then(() => appendLine(container, line.text, line.className))
-        .then(() => delay(lineDelay));
-  }, Promise.resolve());
 }
 
 function glitchFrame(element, original, startTime, duration) {
