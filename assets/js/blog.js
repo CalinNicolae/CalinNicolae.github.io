@@ -67,34 +67,17 @@ function onFilterClick(e) {
   const pill = e.target.closest('.filter-pill');
   if (!pill) return;
 
-  const category = pill.dataset.filter;
-  if (category === 'ALL') {
-    activeCategories.clear();
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-  } else {
-    const allPill = document.querySelector('.filter-pill[data-filter="ALL"]');
-    if (allPill && allPill.classList.contains('active')) {
-      allPill.classList.remove('active');
-      activeCategories.delete('ALL');
-    }
+  const allPill = document.querySelector('.filter-pill[data-filter="ALL"]');
 
-    if (activeCategories.has(category)) {
-      activeCategories.delete(category);
-      pill.classList.remove('active');
-    } else {
-      activeCategories.add(category);
-      pill.classList.add('active');
-    }
-  }
+  const target = (pill.classList.contains('active') && pill.dataset.filter !== 'ALL')
+    ? allPill
+    : pill;
 
-  if (activeCategories.size === 0) {
-    const allPill = document.querySelector('.filter-pill[data-filter="ALL"]');
-    if (allPill) {
-      allPill.classList.add('active');
-      activeCategories.add('ALL');
-    }
-  }
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  target.classList.add('active');
+
+  activeCategories.clear();
+  activeCategories.add(target.dataset.filter);
 
   renderPosts();
 }
