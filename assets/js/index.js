@@ -9,7 +9,7 @@ function revealHero(bootEl, heroEl, nameEl, typeEl) {
     glitchOnce(nameEl, 800);
     rotatingSub(typeEl, [
       'Cybersecurity Graduate',
-      'CTF Player',
+      'Capture The Flag Player',
       'Penetration Tester',
       'Ethical Hacker',
       'System Defender',
