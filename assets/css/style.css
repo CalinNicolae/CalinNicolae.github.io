@@ -874,9 +874,17 @@ nav {
   color: var(--neon-cyan);
   margin-bottom: 1.5rem;
   letter-spacing: 0.04em;
-  transition: text-shadow var(--transition-fast);
+  padding: 8px 18px;
+  border: 1px solid var(--neon-cyan);
+  background: transparent;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
 }
-.post-back:hover { text-shadow: 0 0 8px var(--neon-cyan); color: var(--neon-cyan); }
+.post-back:hover {
+  background: rgba(0, 255, 225, 0.1);
+  box-shadow: 0 0 20px rgba(0, 255, 225, 0.3);
+  color: var(--neon-cyan);
+  text-shadow: none;
+}
 
 .post-header-badges {
   display: flex;
@@ -884,6 +892,14 @@ nav {
   gap: 0.75rem;
   flex-wrap: wrap;
   margin-bottom: 1rem;
+}
+
+/* Post-page category label: plain text, no button-like box */
+#post-category {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 0.95rem;
 }
 
 .post-title {
