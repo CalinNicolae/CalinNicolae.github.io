@@ -8,7 +8,7 @@ function revealHero(bootEl, heroEl, nameEl, typeEl) {
     heroEl.style.animation = 'heroFadeIn 0.5s ease forwards';
     glitchOnce(nameEl, 800);
     rotatingSub(typeEl, [
-      'Cybersecurity Student',
+      'Cybersecurity Graduate',
       'CTF Player',
       'Penetration Tester',
       'Ethical Hacker',
